@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
-const { error } = require('console');
+
 
 // The `/api/tags` endpoint
 
@@ -26,10 +26,34 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  Tag.findByPk(req.params.id, {
+    include: [
+      {model: Product},
+    ],
+  })
+
+    .then((tagData) => {
+      if (!tagData) {
+        res.status(404).json({message: 'No tag found with that id!'});
+        return;
+  }
+  res.json(tagData);
+
+})
+.catch((err) => {
+  res.status(500).json(err);
+});
+
 });
 
 router.post('/', (req, res) => {
   // create a new tag
+
+  Tag.create(req.body)
+    .then((tagData) => {
+      res.json(tagData);
+    })
+
 });
 
 router.put('/:id', (req, res) => {
