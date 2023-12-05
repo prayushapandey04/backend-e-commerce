@@ -53,6 +53,10 @@ router.post('/', (req, res) => {
     .then((tagData) => {
       res.json(tagData);
     })
+    .catch((err) => {
+      res.json(err);
+    
+    });
 
 });
 
