@@ -31,7 +31,7 @@ If you would like to contribute, please make sure you fork the repo and create y
 
 ## Technologies
 
-Thunder Client
+Thunder Client/Insomnia
 
 MySQL
 
